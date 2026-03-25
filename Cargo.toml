@@ -4,8 +4,13 @@ version = "0.2.0"
 edition = "2021"
 description = "Multi-tier caching library for agent orchestration with Hexagonal Architecture"
 license = "MIT"
-authors = ["Koosha Pari <koosha@phenotype.dev>"]
+authors = ["Koosha Pari <kooshapari@kooshapari.com>"]
 repository = "https://github.com/KooshaPari/thegent-cache"
+keywords = ["cache", "multi-tier", "caching", "lru", "ttl", "singleflight"]
+categories = ["caching", "concurrency"]
+readme = "README.md"
+documentation = "https://docs.rs/thegent-cache-rs"
+rust-version = "1.70"
 
 [lib]
 name = "thegent_cache"
@@ -27,6 +32,7 @@ pyo3 = { version = "0.24", optional = true, features = ["abi3-py312", "extension
 
 [dev-dependencies]
 proptest = "1.5"
+cargo-mutants = "25"
 
 [features]
 default = []
