@@ -13,8 +13,7 @@
 //! assert_eq!(cache.get(&"key".into()), Some("value".into()));
 //! ```
 
-use std::collections::HashMap;
-use std::time::{Duration, Instant};
+use std::time::Instant;
 use lru::LruCache;
 use dashmap::DashMap;
 use parking_lot::Mutex;
@@ -49,7 +48,7 @@ impl TieredCache {
     }
 
     /// Create a cache with custom configuration.
-    pub fn with_config(l1_max_size: usize, l2_max_size: usize, default_ttl: Ttl) -> Self {
+    pub fn with_config(l1_max_size: usize, _l2_max_size: usize, default_ttl: Ttl) -> Self {
         Self {
             l1: Mutex::new(LruCache::new(
                 std::num::NonZeroUsize::new(l1_max_size).unwrap()
@@ -142,7 +141,7 @@ impl CachePort for TieredCache {
     }
 
     fn get_entry(&self, key: &CacheKey) -> Option<CacheEntry> {
-        self.get_internal(key).map(|(value, tier)| {
+        self.get_internal(key).map(|(value, _tier)| {
             CacheEntry::new(key.clone(), value)
         })
     }

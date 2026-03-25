@@ -8,7 +8,7 @@
 //! - No identity (two VOs with same values are equal)
 //! - Self-validating
 
-use std::time::{Duration, Instant};
+use std::time::Duration;
 use std::fmt;
 use std::hash::{Hash, Hasher};
 
@@ -207,8 +207,10 @@ impl Eq for Ttl {}
 
 /// Cache tier enumeration
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Default)]
 pub enum CacheTier {
     /// L1: LRU cache for hot data
+    #[default]
     L1,
     /// L2: HashMap for warm data
     L2,
@@ -216,11 +218,6 @@ pub enum CacheTier {
     L3,
 }
 
-impl Default for CacheTier {
-    fn default() -> Self {
-        Self::L1
-    }
-}
 
 impl fmt::Display for CacheTier {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

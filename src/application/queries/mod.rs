@@ -2,7 +2,7 @@
 //!
 //! Operations that read state without side effects.
 
-use crate::domain::value_objects::{CacheKey, CacheStats};
+use crate::domain::value_objects::CacheKey;
 
 /// Query to get a cache value
 #[derive(Debug, Clone)]

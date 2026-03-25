@@ -4,7 +4,6 @@
 
 use std::collections::HashMap;
 use std::fs;
-use std::path::Path;
 use std::time::{Duration, Instant};
 
 use crate::domain::value_objects::{CacheKey, CacheValue, CacheTier};
@@ -82,7 +81,7 @@ impl CacheWritePort for PersistentCache {
         Ok(())
     }
 
-    fn set_with_ttl(&mut self, key: CacheKey, value: CacheValue, ttl: crate::domain::value_objects::Ttl) -> Result<(), CacheError> {
+    fn set_with_ttl(&mut self, key: CacheKey, value: CacheValue, _ttl: crate::domain::value_objects::Ttl) -> Result<(), CacheError> {
         // For persistent cache, TTL is handled on read
         self.set(key, value)
     }

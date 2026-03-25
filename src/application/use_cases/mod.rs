@@ -2,7 +2,6 @@
 //!
 //! Application services that orchestrate domain logic.
 
-use crate::domain::entities::{CacheEntry, SingleflightRequest};
 use crate::domain::events::CacheEvent;
 use crate::domain::value_objects::{CacheKey, CacheValue, CacheStats, Ttl};
 use crate::ports::driven::{CachePort, CacheWritePort, EventPort, StatsPort};

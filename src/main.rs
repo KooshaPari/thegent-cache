@@ -4,7 +4,7 @@
 
 use clap::{Parser, Subcommand};
 use thegent_cache::adapters::inmemory::TieredCache;
-use thegent_cache::domain::value_objects::{CacheKey, CacheValue, Ttl};
+use thegent_cache::domain::value_objects::Ttl;
 use thegent_cache::ports::driven::{CachePort, CacheWritePort, StatsPort};
 
 /// thegent-cache CLI
