@@ -8,7 +8,7 @@ authors = ["Koosha Pari <kooshapari@kooshapari.com>"]
 repository = "https://github.com/KooshaPari/thegent-cache"
 keywords = ["cache", "multi-tier", "caching", "lru", "ttl", "singleflight"]
 readme = "README.md"
-documentation = "https://docs.rs/thegent-cache-rs"
+documentation = "https://docs.rs/FacetRs"
 rust-version = "1.70"
 
 [lib]
