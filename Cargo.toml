@@ -7,7 +7,6 @@ license = "MIT"
 authors = ["Koosha Pari <kooshapari@kooshapari.com>"]
 repository = "https://github.com/KooshaPari/thegent-cache"
 keywords = ["cache", "multi-tier", "caching", "lru", "ttl", "singleflight"]
-categories = ["caching", "concurrency"]
 readme = "README.md"
 documentation = "https://docs.rs/thegent-cache-rs"
 rust-version = "1.70"
