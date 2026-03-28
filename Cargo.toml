@@ -1,5 +1,5 @@
 [package]
-name = "thegent-cache-rs"
+name = "FacetRs"
 version = "0.2.0"
 edition = "2021"
 description = "Multi-tier caching library for agent orchestration with Hexagonal Architecture"
