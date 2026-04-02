@@ -2,7 +2,7 @@
 //!
 //! Operations that change state.
 
-use crate::domain::value_objects::{CacheKey, CacheValue, Ttl, CacheTier};
+use crate::domain::value_objects::{CacheKey, CacheTier, CacheValue, Ttl};
 
 /// Command to set a cache value
 #[derive(Debug, Clone)]

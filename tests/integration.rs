@@ -16,10 +16,7 @@ fn test_cache_entry_equality() {
 
 #[test]
 fn test_cache_entry_new() {
-    let entry = CacheEntry::new(
-        CacheKey::new("test_key"),
-        CacheValue::new("test_value"),
-    );
+    let entry = CacheEntry::new(CacheKey::new("test_key"), CacheValue::new("test_value"));
 
     assert_eq!(entry.key.as_str(), "test_key");
     assert_eq!(entry.value.as_str(), "test_value");

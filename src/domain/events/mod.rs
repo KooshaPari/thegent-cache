@@ -8,8 +8,8 @@
 //! - Append-only log
 //! - Reconstruct state by replaying events
 
-use std::time::SystemTime;
 use super::value_objects::CacheTier;
+use std::time::SystemTime;
 
 /// Domain events for the cache bounded context
 #[derive(Debug, Clone)]
@@ -21,10 +21,7 @@ pub enum CacheEvent {
         timestamp: SystemTime,
     },
     /// Cache miss event
-    CacheMiss {
-        key: String,
-        timestamp: SystemTime,
-    },
+    CacheMiss { key: String, timestamp: SystemTime },
     /// Cache entry created
     CacheEntryCreated {
         key: String,

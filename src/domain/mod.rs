@@ -9,5 +9,5 @@
 //! - **Domain Events**: Immutable events (CacheHit, CacheMiss, etc.)
 
 pub mod entities;
-pub mod value_objects;
 pub mod events;
+pub mod value_objects;

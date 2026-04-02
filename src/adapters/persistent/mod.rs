@@ -4,10 +4,10 @@
 
 use std::collections::HashMap;
 use std::fs;
-use std::time::{Duration, Instant};
+use std::time::Instant;
 
-use crate::domain::value_objects::{CacheKey, CacheValue, CacheTier};
-use crate::ports::driven::{CachePort, CacheWritePort, CacheError};
+use crate::domain::value_objects::{CacheKey, CacheTier, CacheValue};
+use crate::ports::driven::{CacheError, CachePort, CacheWritePort};
 
 /// File-based cache implementation.
 pub struct PersistentCache {
@@ -15,8 +15,6 @@ pub struct PersistentCache {
     index: HashMap<CacheKey, (CacheValue, Instant)>,
     /// Base directory
     base_path: String,
-    /// Default TTL
-    default_ttl: Duration,
 }
 
 impl PersistentCache {
@@ -27,7 +25,6 @@ impl PersistentCache {
         Self {
             index: HashMap::new(),
             base_path,
-            default_ttl: Duration::from_secs(3600),
         }
     }
 
@@ -58,17 +55,16 @@ impl PersistentCache {
 impl CachePort for PersistentCache {
     fn get(&self, key: &CacheKey) -> Option<CacheValue> {
         let path = self.file_path(key);
-        fs::read_to_string(&path)
-            .ok()
-            .and_then(|content| {
-                content.split_once('\n').map(|(_, value)| CacheValue::new(value.to_string()))
-            })
+        fs::read_to_string(&path).ok().and_then(|content| {
+            content
+                .split_once('\n')
+                .map(|(_, value)| CacheValue::new(value.to_string()))
+        })
     }
 
     fn get_entry(&self, key: &CacheKey) -> Option<crate::domain::entities::CacheEntry> {
-        self.get(key).map(|value| {
-            crate::domain::entities::CacheEntry::new(key.clone(), value)
-        })
+        self.get(key)
+            .map(|value| crate::domain::entities::CacheEntry::new(key.clone(), value))
     }
 }
 
@@ -81,7 +77,12 @@ impl CacheWritePort for PersistentCache {
         Ok(())
     }
 
-    fn set_with_ttl(&mut self, key: CacheKey, value: CacheValue, _ttl: crate::domain::value_objects::Ttl) -> Result<(), CacheError> {
+    fn set_with_ttl(
+        &mut self,
+        key: CacheKey,
+        value: CacheValue,
+        _ttl: crate::domain::value_objects::Ttl,
+    ) -> Result<(), CacheError> {
         // For persistent cache, TTL is handled on read
         self.set(key, value)
     }
@@ -98,7 +99,12 @@ impl CacheWritePort for PersistentCache {
         if tier.is_none() || tier == Some(CacheTier::L3) {
             if let Ok(entries) = fs::read_dir(&self.base_path) {
                 for entry in entries.flatten() {
-                    if entry.path().extension().map(|e| e == "cache").unwrap_or(false) {
+                    if entry
+                        .path()
+                        .extension()
+                        .map(|e| e == "cache")
+                        .unwrap_or(false)
+                    {
                         fs::remove_file(entry.path()).ok();
                         count += 1;
                     }

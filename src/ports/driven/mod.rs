@@ -5,7 +5,7 @@
 //! These ports are consumed by the domain and implemented by adapters.
 
 use crate::domain::entities::{CacheEntry, SingleflightRequest};
-use crate::domain::value_objects::{CacheKey, CacheValue, CacheStats, CacheTier, Ttl};
+use crate::domain::value_objects::{CacheKey, CacheStats, CacheTier, CacheValue, Ttl};
 
 /// Port for cache operations (DRIVEN)
 ///
@@ -26,7 +26,12 @@ pub trait CacheWritePort {
     fn set(&mut self, key: CacheKey, value: CacheValue) -> Result<(), CacheError>;
 
     /// Set a value with custom TTL.
-    fn set_with_ttl(&mut self, key: CacheKey, value: CacheValue, ttl: Ttl) -> Result<(), CacheError>;
+    fn set_with_ttl(
+        &mut self,
+        key: CacheKey,
+        value: CacheValue,
+        ttl: Ttl,
+    ) -> Result<(), CacheError>;
 
     /// Remove a key from cache.
     fn remove(&mut self, key: &CacheKey) -> Result<(), CacheError>;

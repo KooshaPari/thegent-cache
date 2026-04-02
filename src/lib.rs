@@ -14,19 +14,19 @@
 //! - **CQRS**: Separate command and query interfaces
 //! - **EDA**: Domain events for cache operations
 
-pub mod domain;
-pub mod application;
-pub mod ports;
 pub mod adapters;
+pub mod application;
+pub mod domain;
+pub mod ports;
 
 // Re-exports for convenience
-pub use domain::entities::*;
-pub use domain::value_objects::*;
-pub use domain::events::*;
-pub use ports::driven::CachePort;
-pub use ports::driven::SingleflightPort;
 pub use application::commands::*;
 pub use application::queries::*;
+pub use domain::entities::*;
+pub use domain::events::*;
+pub use domain::value_objects::*;
+pub use ports::driven::CachePort;
+pub use ports::driven::SingleflightPort;
 
 /// Two-tier cache re-export for convenience
 pub mod cache {

@@ -11,6 +11,8 @@ readme = "README.md"
 documentation = "https://docs.rs/FacetRs"
 rust-version = "1.70"
 
+[workspace]
+
 [lib]
 name = "thegent_cache"
 crate-type = ["cdylib", "rlib"]
@@ -31,7 +33,6 @@ pyo3 = { version = "0.24", optional = true, features = ["abi3-py312", "extension
 
 [dev-dependencies]
 proptest = "1.5"
-cargo-mutants = "25"
 
 [features]
 default = []

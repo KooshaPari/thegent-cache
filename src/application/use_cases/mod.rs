@@ -3,7 +3,7 @@
 //! Application services that orchestrate domain logic.
 
 use crate::domain::events::CacheEvent;
-use crate::domain::value_objects::{CacheKey, CacheValue, CacheStats, Ttl};
+use crate::domain::value_objects::{CacheKey, CacheStats, CacheValue, Ttl};
 use crate::ports::driven::{CachePort, CacheWritePort, EventPort, StatsPort};
 
 /// Use case for getting a value from cache
@@ -19,7 +19,8 @@ impl<'a, C: CachePort, S: StatsPort> GetCacheUseCase<'a, C, S> {
 
     pub fn execute(&mut self, key: &CacheKey) -> Option<CacheValue> {
         if let Some(value) = self.cache.get(key) {
-            self.stats.record_hit(crate::domain::value_objects::CacheTier::L1);
+            self.stats
+                .record_hit(crate::domain::value_objects::CacheTier::L1);
             Some(value)
         } else {
             self.stats.record_miss();
@@ -39,7 +40,12 @@ impl<'a, C: CacheWritePort, E: EventPort> SetCacheUseCase<'a, C, E> {
         Self { cache, events }
     }
 
-    pub fn execute(&mut self, key: CacheKey, value: CacheValue, ttl: Option<Ttl>) -> Result<(), String> {
+    pub fn execute(
+        &mut self,
+        key: CacheKey,
+        value: CacheValue,
+        ttl: Option<Ttl>,
+    ) -> Result<(), String> {
         let result = if let Some(ttl) = ttl {
             self.cache.set_with_ttl(key.clone(), value.clone(), ttl)
         } else {

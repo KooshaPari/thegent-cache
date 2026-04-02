@@ -8,9 +8,9 @@
 //! - No identity (two VOs with same values are equal)
 //! - Self-validating
 
-use std::time::Duration;
 use std::fmt;
 use std::hash::{Hash, Hasher};
+use std::time::Duration;
 
 /// Cache key value object
 #[derive(Debug, Clone)]
@@ -206,8 +206,7 @@ impl PartialEq for Ttl {
 impl Eq for Ttl {}
 
 /// Cache tier enumeration
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-#[derive(Default)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub enum CacheTier {
     /// L1: LRU cache for hot data
     #[default]
@@ -217,7 +216,6 @@ pub enum CacheTier {
     /// L3: Persistent storage
     L3,
 }
-
 
 impl fmt::Display for CacheTier {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

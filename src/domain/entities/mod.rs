@@ -8,7 +8,7 @@
 //! - Equality based on identity, not attributes
 //! - Mutable state managed through domain methods
 
-use super::value_objects::{CacheKey, CacheValue, Ttl, CacheTier};
+use super::value_objects::{CacheKey, CacheTier, CacheValue, Ttl};
 use std::time::{Duration, Instant};
 
 /// Cache entry entity
