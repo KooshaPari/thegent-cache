@@ -30,7 +30,7 @@ serde_json = "1.0"
 
 # Data structures
 lru = "0.12"
-dashmap = "5"
+dashmap = "6"
 parking_lot = "0.12"
 
 # CLI
